@@ -1,0 +1,309 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"ls",
+				"lstlisting"
+			],
+			[
+				"if",
+				"ifmain	if __name__ == '__main__'"
+			]
+		]
+	},
+	"buffers":
+	[
+		{
+			"file": "core/Message.java",
+			"settings":
+			{
+				"buffer_size": 10106,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "default_settings.txt",
+			"settings":
+			{
+				"buffer_size": 3963,
+				"line_ending": "CR"
+			}
+		},
+		{
+			"file": "compile.bat",
+			"settings":
+			{
+				"buffer_size": 316,
+				"line_ending": "Unix"
+			}
+		}
+	],
+	"build_system": "",
+	"command_palette":
+	{
+		"height": 287.0,
+		"selected_items":
+		[
+			[
+				"Package Control: ",
+				"Package Control: Install Package"
+			]
+		],
+		"width": 449.0
+	},
+	"console":
+	{
+		"height": 126.0,
+		"history":
+		[
+			"import urllib2,os; pf='Package Control.sublime-package'; ipp = sublime.installed_packages_path(); os.makedirs( ipp ) if not os.path.exists(ipp) else None; urllib2.install_opener( urllib2.build_opener( urllib2.ProxyHandler( ))); open( os.path.join( ipp, pf), 'wb' ).write( urllib2.urlopen( 'http://sublime.wbond.net/' +pf.replace( ' ','%20' )).read()); print( 'Please restart Sublime Text to finish installation')"
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"file_history":
+	[
+		"/Users/Aurelius/Dropbox/Research/Simulation/one_1.5.1-RC2/extensions/Chunk.java",
+		"/Users/Aurelius/Dropbox/Research/Simulation/one_1.5.1-RC2/default_settings.txt",
+		"/Users/Aurelius/Dropbox/Research/Simulation/one_1.4.1/default_settings.txt.bkp",
+		"/Users/Aurelius/Dropbox/Research/Simulation/one_1.4.1/default_settings.txt",
+		"/Users/Aurelius/Dropbox/Research/Simulation/one_1.4.1/core/NetworkInterface.java",
+		"/Users/Aurelius/Dropbox/Research/Simulation/one_1.4.1/test/TestInterface.java",
+		"/Users/Aurelius/Dropbox/Research/Simulation/one_1.4.1/interfaces/SimpleBroadcastInterface.",
+		"/Users/Aurelius/Dropbox/Python_Exercises/exercise1.py",
+		"/Users/Aurelius/Dropbox/Research/OneSim/one_1.4.1/one.sh",
+		"/Users/Aurelius/Dropbox/Research/OneSim/one_1.4.1/routing/PassiveRouter.java",
+		"/Users/Aurelius/Downloads/Sublime Text 3 Build 3047/Readme.txt",
+		"/Users/Aurelius/Downloads/524745nsngfx/main.tex",
+		"/Users/Aurelius/Downloads/524745nsngfx/sigproc.bib",
+		"/Users/Aurelius/Downloads/504416vnwdvw/main.tex",
+		"/Users/Aurelius/Library/Application Support/Sublime Text 3/Packages/Default/Preferences.sublime-settings",
+		"/Users/Aurelius/Library/Application Support/Sublime Text 3/Packages/User/Preferences.sublime-settings",
+		"/Users/Aurelius/Library/Application Support/Sublime Text 3/Packages/LaTeXTools/LaTeX.sublime-build",
+		"/Users/Aurelius/Downloads/Little Snitch v3.3/Readme.txt",
+		"/Users/Aurelius/Downloads/Little Snitch v3.3/Serial.txt",
+		"/Users/Aurelius/Downloads/TL-0day.DEC06-2013/OmniGraffle.Pro.v6.0.2.MacOSX.Incl.Keymaker-CORE/core.nfo",
+		"/Users/Aurelius/Downloads/Test document.py",
+		"/Users/Aurelius/Downloads/Test document"
+	],
+	"find":
+	{
+		"height": 35.0
+	},
+	"find_in_files":
+	{
+		"height": 93.0,
+		"where_history":
+		[
+			""
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": true,
+		"find_history":
+		[
+			"new Message",
+			"Message",
+			"transmitRange",
+			"Interface"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": true,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"selected": 1,
+			"sheets":
+			[
+				{
+					"buffer": 0,
+					"file": "core/Message.java",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 10106,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								2176,
+								2176
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Java/Java.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 773.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "default_settings.txt",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 3963,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Text/Plain text.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "compile.bat",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 316,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								174,
+								174
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Batch File/Batch File.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				}
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 23.0
+	},
+	"input":
+	{
+		"height": 31.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.exec":
+	{
+		"height": 100.0
+	},
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"project": "OneSimulator_RC.sublime-project",
+	"replace":
+	{
+		"height": 42.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+			[
+				"",
+				"~/Downloads/504416vnwdvw/sigproc.bib"
+			]
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_symbol":
+	{
+		"height": 392.0,
+		"selected_items":
+		[
+		],
+		"width": 395.0
+	},
+	"settings":
+	{
+	},
+	"show_minimap": true,
+	"show_open_files": false,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 191.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}
