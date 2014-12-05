@@ -64,6 +64,7 @@ public class World {
 	public World(List<DTNHost> hosts, int sizeX, int sizeY, 
 			double updateInterval, List<UpdateListener> updateListeners,
 			boolean simulateConnections, List<EventQueue> eventQueues) {
+        System.out.println("World()");
 		this.hosts = hosts;
 		this.sizeX = sizeX;
 		this.sizeY = sizeY;
@@ -85,6 +86,7 @@ public class World {
 	 * Initializes settings fields that can be configured using Settings class
 	 */
 	private void initSettings() {
+        System.out.println("World -> initSettings()");
 		Settings s = new Settings(OPTIMIZATION_SETTINGS_NS);
 		boolean randomizeUpdates = DEF_RANDOMIZE_UPDATES;
 

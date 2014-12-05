@@ -14,7 +14,7 @@ public class VBRConnection extends Connection {
 	private int msgsize;
 	private int msgsent;
 	private int currentspeed = 0;
-	
+
 	/**
 	 * Creates a new connection between nodes and sets the connection
 	 * state to "up".
@@ -46,7 +46,7 @@ public class VBRConnection extends Connection {
 			this.getOtherNode(this.msgFromNode) + ". Can't "+ 
 			"start transfer of " + m + " from " + from;
 		
-		this.msgFromNode = from;
+		/*this.msgFromNode = from;
 		Message newMessage = m.replicate();
 		int retVal = getOtherNode(from).receiveMessage(newMessage, from);
 		
@@ -54,7 +54,13 @@ public class VBRConnection extends Connection {
 			this.msgOnFly = newMessage;
 			this.msgsize = m.getSize();
 			this.msgsent = 0;
-		}
+		}*/
+
+        int retVal = MessageRouter.RCV_OK;
+
+        this.msgOnFly = m;
+        this.msgsize = m.getSize();
+        this.msgsent = 0;
 
 		return retVal;
 	}
@@ -71,8 +77,14 @@ public class VBRConnection extends Connection {
 		if (othspeed < currentspeed) {
 			currentspeed = othspeed;
 		}
-		
-		msgsent = msgsent + currentspeed;
+
+        // Tomasz
+        // modify current speed to reflect path loss
+        double distance = this.fromNode.getLocation().distance(this.toNode.getLocation());
+        double pathLoss = 1/(Math.pow(distance, alpha));
+        currentspeed = (int) Math.round((double)currentspeed * pathLoss);
+
+        msgsent = msgsent + currentspeed;
 	}
 	
 	/**

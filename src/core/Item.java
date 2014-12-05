@@ -1,16 +1,15 @@
 package core;
 
 import java.io.Serializable;
-import java.util.Vector;
 
 public class Item implements Serializable {
 	public String name;
-	public int size;
+	public int chunkSize;
 	public BitVector bv;
 	
-	public Item (String name, int size, BitVector bv) {
+	public Item (String name, int chunkSize, BitVector bv) {
 		this.name = name;
-		this.size = size;
+		this.chunkSize = chunkSize;
 		this.bv = bv;
 	}
 }

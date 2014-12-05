@@ -1,15 +1,22 @@
 package core;
 
-import java.util.UUID;
-
 public class Chunk {
-	UUID itemID;
-	int chunkId;
-	String data;
+	public String itemId;
+	public int chunkId;
+	public int size;
+    public String appId;
 	
-	public Chunk (UUID itemID, int chunkId, String data) {
-		this.itemID = itemID;
+	public Chunk (String itemId, int chunkId, int size, String appId) {
+		this.itemId = itemId;
 		this.chunkId = chunkId;
-		this.data = data;
+		this.size = size;
+        this.appId = appId;
 	}
+
+    public Chunk (Chunk other) {
+        this.itemId = other.itemId;
+        this.chunkId = other.chunkId;
+        this.size = other.size;
+        this.appId = other.appId;
+    }
 }

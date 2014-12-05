@@ -56,8 +56,7 @@ public class Message implements Comparable<Message> {
 	private String	appID;
 	
 	/** Tomasz Addons */
-	public int type;
-	public Chunk data;
+	public Chunk chk;
 
 	static {
 		reset();
@@ -83,8 +82,6 @@ public class Message implements Comparable<Message> {
 		this.uniqueId = nextUniqueId;
 		
 		// Tomasz addons
-		this.type = type; // more tests
-		this.data = data;
 		
 		this.timeCreated = SimClock.getTime();
 		this.timeReceived = this.timeCreated;
@@ -348,10 +345,12 @@ public class Message implements Comparable<Message> {
 	 */
 	public Message replicate() {
 		Message m = new Message(from, to, id, size);
+        m.chk = new Chunk(chk);
 		m.copyFrom(this);
 		return m;
 	}
 	
+
 	/**
 	 * Compares two messages by their ID (alphabetically).
 	 * @see String#compareTo(String)

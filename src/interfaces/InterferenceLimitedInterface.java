@@ -4,12 +4,9 @@
  */
 package interfaces;
 
-import java.util.Collection;
+import core.*;
 
-import core.Connection;
-import core.NetworkInterface;
-import core.Settings;
-import core.VBRConnection;
+import java.util.Collection;
 
 /**
  * A simple Network Interface that provides a variable bit-rate service, where
@@ -66,8 +63,8 @@ public class InterferenceLimitedInterface extends NetworkInterface {
 				&& (this != anotherInterface)) {
 			// new contact within range
 
-			Connection con = new VBRConnection(this.host, this,
-					anotherInterface.getHost(), anotherInterface);
+			Connection con = new CBRConnection(this.host, this,
+					anotherInterface.getHost(), anotherInterface, 0);
 			connect(con, anotherInterface);
 		}
 	}
@@ -122,11 +119,15 @@ public class InterferenceLimitedInterface extends NetworkInterface {
 		if ( numberOfActive <2 ) numberOfActive = 2;
 
 		// Based on the equation of Gupta and Kumar - and the transmission speed
-		// is divided equally to all the ongoing transmissions 
+		// is divided equally to all the ongoing transmissions
+
 		currentTransmitSpeed = (int)Math.floor((double)transmitSpeed / 
 				(Math.sqrt((1.0*numberOfActive) *
 						Math.log(1.0*numberOfActive))) /
 							ntrans );
+
+        //System.out.println("Computed speed ( "+getHost().getName()+" ): "+currentTransmitSpeed);
+
 		
 		for (Connection con : getConnections()) {
 			con.update();

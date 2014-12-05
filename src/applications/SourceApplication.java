@@ -1,15 +1,7 @@
 package applications;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.UUID;
-import java.util.Vector;
-
 import core.Application;
-import core.BitVector;
-import core.Chunk;
 import core.DTNHost;
-import core.Item;
 import core.Message;
 import core.Settings;
 
@@ -18,18 +10,18 @@ public class SourceApplication extends Application {
 	/** Application ID */
 	public static final String APP_ID = "SourceApplication";
 	
-	public static final String NUM_ITEMS = "numItems";
+	/*public static final String NUM_ITEMS = "numItems";
 	public static final String ITEM_PREFIX = "item"; // format of ITEM_NAME, SIZE
 	public static final String NUM_CHUNKS = "numChunks";
 	
 	HashMap<String, BitVector> bitVectors;
 	HashMap<String, Item> items; //TODO change string to UUID
 	
-	int num_chunks = 64;
+	int num_chunks = 64;*/
 	
 	public SourceApplication(Settings s) {
 		
-		if (s.contains(NUM_CHUNKS)) {
+		/*if (s.contains(NUM_CHUNKS)) {
 			num_chunks = s.getInt(NUM_CHUNKS);
 		}
 		if (s.contains(NUM_ITEMS)) {
@@ -43,7 +35,7 @@ public class SourceApplication extends Application {
 				items.put(curItemName, newItem);
 				bitVectors.put(curItemName, newItem.bv);
 			}
-		}
+		}*/
 		super.setAppID(APP_ID);
 	}
 
@@ -54,8 +46,8 @@ public class SourceApplication extends Application {
 	@Override
 	public Message handle(Message msg, DTNHost host) {
 		// TODO Auto-generated method stub
-		
-		return null;
+		System.out.println("handle at source app");
+		return msg;
 	}
 
 	@Override

@@ -4,24 +4,13 @@
  */
 package routing;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.List;
-import java.util.Random;
-
+import core.*;
 import routing.util.EnergyModel;
 import routing.util.MessageTransferAcceptPolicy;
 import routing.util.RoutingInfo;
 import util.Tuple;
 
-import core.Connection;
-import core.DTNHost;
-import core.Message;
-import core.MessageListener;
-import core.NetworkInterface;
-import core.Settings;
-import core.SimClock;
+import java.util.*;
 
 /**
  * Superclass of active routers. Contains convenience methods (e.g. 
@@ -85,8 +74,8 @@ public abstract class ActiveRouter extends MessageRouter {
 	}
 	
 	@Override
-	public void init(DTNHost host, List<MessageListener> mListeners) {
-		super.init(host, mListeners);
+	public void init(DTNHost host, List<MessageListener> mListeners, List<DisseminateListener> dl) {
+		super.init(host, mListeners, super.dListeners);
 		this.sendingConnections = new ArrayList<Connection>(1);
 		this.lastTtlCheck = 0;
 	}

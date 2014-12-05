@@ -4,25 +4,16 @@
  */
 package gui;
 
-import gui.playfield.PlayField;
-
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseWheelListener;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
-import java.lang.reflect.InvocationTargetException;
-
-import javax.swing.JOptionPane;
-import javax.swing.JScrollPane;
-import javax.swing.SwingUtilities;
-
-import movement.Path;
-import ui.DTNSimUI;
 import core.Coord;
-import core.DTN2Manager;
 import core.DTNHost;
 import core.SimClock;
+import gui.playfield.PlayField;
+import movement.Path;
+import ui.DTNSimUI;
+
+import javax.swing.*;
+import java.awt.event.*;
+import java.lang.reflect.InvocationTargetException;
 
 /**
  * Graphical User Interface for simulator
@@ -103,7 +94,7 @@ public class DTNSimGUI extends DTNSimUI {
 		
 		// Startup DTN2Manager
 		// XXX: Would be nice if this wasn't needed..
-		DTN2Manager.setup(world);
+		// DTN2Manager.setup(world);
 		
 		while (simTime < endTime && !simCancelled){
 			if (guiControls.isPaused()) {

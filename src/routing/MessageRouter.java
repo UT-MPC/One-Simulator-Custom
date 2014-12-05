@@ -4,27 +4,11 @@
  */
 package routing;
 
-import java.util.Collection;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Random;
-
+import core.*;
 import routing.util.RoutingInfo;
-
 import util.Tuple;
 
-import core.Application;
-import core.Connection;
-import core.DTNHost;
-import core.Message;
-import core.MessageListener;
-import core.Settings;
-import core.SettingsError;
-import core.SimClock;
-import core.SimError;
+import java.util.*;
 
 /**
  * Superclass for message routers.
@@ -81,6 +65,9 @@ public abstract class MessageRouter {
 	public static final int DENIED_UNSPECIFIED = -99;
 	
 	private List<MessageListener> mListeners;
+
+    public List<DisseminateListener> dListeners;
+
 	/** The messages being transferred with msgID_hostName keys */
 	private HashMap<String, Message> incomingMessages;
 	/** The messages this router is carrying */
@@ -138,12 +125,13 @@ public abstract class MessageRouter {
 	 * @param host The host this router is in
 	 * @param mListeners The message listeners
 	 */
-	public void init(DTNHost host, List<MessageListener> mListeners) {
+	public void init(DTNHost host, List<MessageListener> mListeners, List<DisseminateListener> dListeners) {
 		this.incomingMessages = new HashMap<String, Message>();
 		this.messages = new HashMap<String, Message>();
 		this.deliveredMessages = new HashMap<String, Message>();
 		this.blacklistedMessages = new HashMap<String, Object>();
 		this.mListeners = mListeners;
+        this.dListeners = dListeners;
 		this.host = host;
 	}
 	
@@ -338,6 +326,7 @@ public abstract class MessageRouter {
 	 * @return The message that this host received
 	 */
 	public Message messageTransferred(String id, DTNHost from) {
+        System.out.println("MessageRouter --> messageTransferred");
 		Message incoming = removeFromIncomingBuffer(id, from);
 		boolean isFinalRecipient;
 		boolean isFirstDelivery; // is this first delivered instance of the msg
@@ -393,6 +382,7 @@ public abstract class MessageRouter {
 	 * @param from Who the message was from (previous hop).
 	 */
 	protected void putToIncomingBuffer(Message m, DTNHost from) {
+        //System.out.println("Message added to incoming buffer");
 		this.incomingMessages.put(m.getId() + "_" + from.toString(), m);
 	}
 	

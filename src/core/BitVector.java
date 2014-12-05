@@ -3,7 +3,7 @@ package core;
 import java.io.Serializable;
 
 public class BitVector implements Serializable {
-	long data;
+	public long data;
 	public BitVector(long data) {
 		this.data = data;
 	}
@@ -15,5 +15,26 @@ public class BitVector implements Serializable {
 	public void unsetBit(int bit) {
 		data = data & ~(1 << bit); 
 	}
+
+    public boolean testBit(int bit) {
+        //BigInteger.valueOf(data).testBit(bit);
+        return ((data & (1L << bit)) != 0);
+    }
+
+    public boolean testDiversity(BitVector otherBv) {
+        return (((~data) & (otherBv.data)) != 0);
+    }
+
+    public BitVector oppositeIntersection(BitVector neighborBv) {
+        return new BitVector((data) & (~neighborBv.data));
+    }
+
+    public boolean isCompleted() {
+        if (data == -1L) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 	
 }

@@ -6,15 +6,14 @@ package core;
 
 import input.EventQueue;
 import input.EventQueueHandler;
-
-import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
-
 import movement.MapBasedMovement;
 import movement.MovementModel;
 import movement.map.SimMap;
 import routing.MessageRouter;
+
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * A simulation scenario used for getting and storing the settings of a
@@ -81,7 +80,12 @@ public class SimScenario implements Serializable {
 	
 	/** package where to look for application classes */
 	private static final String APP_PACKAGE = "applications.";
-	
+
+
+    public static final String ITEM_INTERESTS = "items";
+    public static final String CHUNK_SIZE = "chunk_size";
+
+
 	/** The world instance */
 	private World world;
 	/** List of hosts in this simulation */
@@ -118,6 +122,8 @@ public class SimScenario implements Serializable {
 	/** Global application event listeners */
 	private List<ApplicationListener> appListeners;
 
+    private List<DisseminateListener> disseminateListeners;
+
 	static {
 		DTNSim.registerForReset(SimScenario.class.getCanonicalName());
 		reset();
@@ -131,6 +137,7 @@ public class SimScenario implements Serializable {
 	 * Creates a scenario based on Settings object.
 	 */
 	protected SimScenario() {
+        System.out.println("Sim Scenario constructor call");
 		Settings s = new Settings(SCENARIO_NS);
 		nrofGroups = s.getInt(NROF_GROUPS_S);
 
@@ -152,6 +159,8 @@ public class SimScenario implements Serializable {
 		this.updateListeners = new ArrayList<UpdateListener>();
 		this.appListeners = new ArrayList<ApplicationListener>();
 		this.eqHandler = new EventQueueHandler();
+
+        this.disseminateListeners = new ArrayList<DisseminateListener>();
 
 		/* TODO: check size from movement models */
 		s.setNameSpace(MovementModel.MOVEMENT_MODEL_NS);
@@ -267,6 +276,11 @@ public class SimScenario implements Serializable {
 	public void addMessageListener(MessageListener ml){
 		this.messageListeners.add(ml);
 	}
+
+    public void addDisseminateListener(DisseminateListener dl) {
+        System.out.println("adding to list of disseminate listeners");
+        this.disseminateListeners.add(dl);
+    }
 
 	/**
 	 * Adds a new movement listener for all nodes
@@ -392,9 +406,14 @@ public class SimScenario implements Serializable {
 
 				// prototypes are given to new DTNHost which replicates
 				// new instances of movement model and message router
+                int chunkSize = s.getInt(CHUNK_SIZE);
+                String [] itemList = s.getCsvSetting(ITEM_INTERESTS);
+                System.out.println("message l"+this.messageListeners.size());
+                System.out.println("dissem l"+this.disseminateListeners.size());
+                this.disseminateListeners.size();
 				DTNHost host = new DTNHost(this.messageListeners, 
-						this.movementListeners,	gid, interfaces, comBus, 
-						mmProto, mRouterProto);
+						this.movementListeners, this.disseminateListeners,gid, interfaces, comBus,
+						mmProto, mRouterProto, chunkSize, itemList);
 				hosts.add(host);
 			}
 		}

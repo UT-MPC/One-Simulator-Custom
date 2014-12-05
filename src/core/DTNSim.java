@@ -4,12 +4,11 @@
  */
 package core;
 import gui.DTNSimGUI;
+import ui.DTNSimTextUI;
 
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
-
-import ui.DTNSimTextUI;
 
 /**
  * Simulator's main class 
@@ -77,6 +76,7 @@ public class DTNSim {
 		initSettings(confFiles, firstConfIndex);
 		
 		if (batchMode) {
+            System.out.println("Running batch mode");
 			long startTime = System.currentTimeMillis();
 			for (int i=nrofRuns[0]; i<nrofRuns[1]; i++) {
 				print("Run " + (i+1) + "/" + nrofRuns[1]);
@@ -88,6 +88,7 @@ public class DTNSim {
 			print("---\nAll done in " + String.format("%.2f", duration) + "s");
 		}
 		else {
+            System.out.println("Running gui mode");
 			Settings.setRunIndex(guiIndex);
 			new DTNSimGUI().start();
 		}

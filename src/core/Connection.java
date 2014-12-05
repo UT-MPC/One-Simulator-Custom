@@ -15,6 +15,7 @@ public abstract class Connection {
 	protected DTNHost fromNode;
 	protected NetworkInterface fromInterface;
 	protected DTNHost msgFromNode;
+    protected double alpha;
 
 	private boolean isUp;
 	protected Message msgOnFly;
@@ -37,6 +38,7 @@ public abstract class Connection {
 		this.toInterface = toInterface;
 		this.isUp = true;
 		this.bytesTransferred = 0;
+        this.alpha = 2;
 	}
 
 
@@ -153,7 +155,13 @@ public abstract class Connection {
 	 * @return true if the connection is ready to transfer a message
 	 */
 	public boolean isReadyForTransfer() {
-		return this.isUp && this.msgOnFly == null; 
+        if (this.isUp) {
+            //System.out.println("Connection is up");
+        }
+        if (this.msgOnFly == null) {
+            //System.out.println("On fly is null");
+        }
+        return this.isUp && this.msgOnFly == null;
 	}
 
 	/**

@@ -4,18 +4,13 @@
  */
 package test;
 
-import java.util.ArrayList;
-import java.util.List;
-
+import core.*;
 import movement.MovementModel;
 import routing.MessageRouter;
 import routing.PassiveRouter;
-import core.ConnectionListener;
-import core.Coord;
-import core.DTNHost;
-import core.MessageListener;
-import core.ModuleCommunicationBus;
-import core.NetworkInterface;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Generic convenience methods for tests.
@@ -113,8 +108,8 @@ public class TestUtils {
 		ni.setClisteners(conListeners);
 		List<NetworkInterface> li = new ArrayList<NetworkInterface>();
 		li.add(ni);
-		DTNHost host = new DTNHost(msgListeners, null, groupId,
-				li, comBus, mmProto, mr);
+		DTNHost host = new DTNHost(msgListeners, null, null, groupId,
+				li, comBus, mmProto, mr, 0, null);
 		if (name != null) {
 			host.setName(name);
 		}

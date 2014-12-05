@@ -4,18 +4,15 @@
  */
 package core;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Random;
-import java.util.UUID;
-import java.util.Vector;
-
 import movement.MovementModel;
 import movement.Path;
 import routing.MessageRouter;
 import routing.util.RoutingInfo;
+
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.List;
 
 /**
  * A DTN capable host.
@@ -35,14 +32,33 @@ public class DTNHost implements Comparable<DTNHost> {
 	private String name;
 	private List<MessageListener> msgListeners;
 	private List<MovementListener> movListeners;
+
+    private List<DisseminateListener> disListeners;
+
 	private List<NetworkInterface> net;
 	private ModuleCommunicationBus comBus;
-	
+
+    public HashMap<String, Beacon> beacons;
+    public Beacon myBeacon;
+
+    public int chunkSize = 4;
+
+    public HashMap<String, Item> items;
+
+    public Chunk chunkToSend = null;
+
+    public long trashDataRecv = 0;
+    public long redundantDataRecv = 0;
+    public long usefulDataRecv = 0;
+
+
+
 	// Tomasz
 	//public HashMap<UUID, Vector<Integer>> beacon() {
 	//	return bitVectors;
 	//}
-	
+
+    public long lostData = 0;
 	
 	static {
 		DTNSim.registerForReset(DTNHost.class.getCanonicalName());
@@ -60,25 +76,44 @@ public class DTNHost implements Comparable<DTNHost> {
 	 */
 	public DTNHost(List<MessageListener> msgLs,
 			List<MovementListener> movLs,
+            List<DisseminateListener> disLs,
 			String groupId, List<NetworkInterface> interf,
 			ModuleCommunicationBus comBus, 
-			MovementModel mmProto, MessageRouter mRouterProto) {
+			MovementModel mmProto, MessageRouter mRouterProto,
+            int chunkSize, String [] itemList) {
 		this.comBus = comBus;
 		this.location = new Coord(0,0);
 		this.address = getNextAddress();
 		this.name = groupId+address;
 		this.net = new ArrayList<NetworkInterface>();
 
+        items =  new HashMap<String, Item>();
+        this.chunkSize = chunkSize;
+
+        this.beacons = new HashMap<String, Beacon>();
+        myBeacon = new Beacon(this.name, new HashMap<String, BitVector>(), 0);
+
+        System.out.println("Adding items");
+        for (int i=0; i<itemList.length; ++i) {
+            System.out.println("iterating items "+i);
+            Item newItem =  new Item(itemList[i], chunkSize, new BitVector(0) );
+            items.put(itemList[i], newItem );
+            System.out.println("Item start time: "+SimClock.getTime());
+            for (DisseminateListener dl : disLs) {
+                System.out.println("startTime for item");
+                dl.startItem(this.name, newItem, SimClock.getTime() );
+            }
+        }
+
 		for (NetworkInterface i : interf) {
 			NetworkInterface ni = i.replicate();
 			ni.setHost(this);
 			net.add(ni);
-		}	
-
-		// TODO - think about the names of the interfaces and the nodes
+		}
 
 		this.msgListeners = msgLs;
 		this.movListeners = movLs;
+        this.disListeners = disLs;
 
 		// create instances by replicating the prototypes
 		this.movement = mmProto.replicate();
@@ -97,7 +132,23 @@ public class DTNHost implements Comparable<DTNHost> {
 			}
 		}
 	}
-	
+
+    public void setEndTime(Item item) {
+        for (DisseminateListener dl : this.disListeners) {
+            dl.endItem(this.name, item, SimClock.getTime());
+        }
+    }
+
+    public void updateBeaconFromConnection(String userId, Beacon newBeacon) {
+        beacons.put(userId, newBeacon);
+    }
+
+    public Beacon getBeacon() {
+        return this.myBeacon;
+    }
+    public String getName() {
+        return this.name;
+    }
 	/**
 	 * Returns a new network interface address and increments the address for
 	 * subsequent calls.
@@ -136,7 +187,8 @@ public class DTNHost implements Comparable<DTNHost> {
 	 * @param router The router to set
 	 */
 	private void setRouter(MessageRouter router) {
-		router.init(this, msgListeners);
+        System.out.println("SetRouter()");
+		router.init(this, msgListeners, disListeners);
 		this.router = router;
 	}
 
@@ -482,6 +534,7 @@ public class DTNHost implements Comparable<DTNHost> {
 	 * @param from From who the message was from
 	 */
 	public void messageTransferred(String id, DTNHost from) {
+        System.out.println("DTNHost -> messageTransferred");
 		this.router.messageTransferred(id, from);
 	}
 

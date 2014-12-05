@@ -4,16 +4,10 @@
  */
 package test;
 
-import java.util.List;
-
+import core.*;
 import routing.PassiveRouter;
-import core.Coord;
-import core.DTNHost;
-import core.Message;
-import core.ModuleCommunicationBus;
-import core.NetworkInterface;
-import core.Settings;
-import core.SimClock;
+
+import java.util.List;
 
 /**
  * A test stub of DTNHost for testing. All fields are public so they can be
@@ -35,11 +29,11 @@ public class TestDTNHost extends DTNHost {
 	
 	public TestDTNHost(List<NetworkInterface> li, 
 			ModuleCommunicationBus comBus, Settings testSettings) {
-		super(null,null,"TST", li, comBus, 
+		super(null,null,null,"TST", li, comBus,
 				new StationaryMovement(new Coord(0,0)), 
 				new PassiveRouter(
 						(testSettings == null ? new TestSettings() :
-							testSettings)));
+							testSettings)), 0, null);
 	}
 	
 	@Override
